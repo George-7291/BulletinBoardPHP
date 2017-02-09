@@ -41,7 +41,7 @@
             <font color="#00bfff">
                 <h1>新規スレッド<span class="glyphicon glyphicon-comment"></span></h1>
             </font>
-            <form class="form-horizontal" action="thread-register.php" method="POST">
+            <form class="form-horizontal" action="thread-register.php" method="get">
                 <div class="form-group text-left">
                     <label for="inputId" class="control-label">タイトル</label>
                     <input type="text" class="form-control" id="inputId" name="title" placeholder="Title" required>

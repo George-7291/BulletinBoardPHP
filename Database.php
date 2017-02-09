@@ -25,6 +25,8 @@ class Database
             if(Database::existThread($title) > 0){
                 return 0;
             }
+            $stm = $pdo->prepare("SET NAMES utf8");
+            $stm->execute();
             $stm = $pdo->prepare("INSERT INTO `bulletin-board`.Thread(title)VALUE (?);");
             $stm->bindParam(1,$title,PDO::PARAM_STR);
             if(!$stm->execute())
@@ -51,6 +53,8 @@ class Database
     public static function getThreadId($title){
         try{
             $pdo = new PDO("mysql:host=".Database::$hostname.";dbname=".Database::$dbname, Database::$user, Database::$pass);
+            $stm = $pdo->prepare("SET NAMES utf8");
+            $stm->execute();
             $stm = $pdo->prepare("SELECT `id` FROM `bulletin-board`.Thread WHERE `title` = ?;");
             $stm->bindParam(1, $title,PDO::PARAM_STR);
             if($stm->execute()){
@@ -68,6 +72,8 @@ class Database
     public static function existThread($title){
         try{
             $pdo = new PDO("mysql:host=".Database::$hostname.";dbname=".Database::$dbname, Database::$user, Database::$pass);
+            $stm = $pdo->prepare("SET NAMES utf8");
+            $stm->execute();
             $stm = $pdo->prepare("SELECT COUNT(*) AS `count` FROM `bulletin-board`.Thread WHERE `title` = ?;");
             $stm->bindParam(1, $title,PDO::PARAM_STR);
             if($stm->execute()){

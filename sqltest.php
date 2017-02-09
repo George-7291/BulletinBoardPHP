@@ -13,32 +13,43 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<h1>
 <?php
-$exFlag = false;
-$exception = null;
-try {
-    $pdo = new PDO("mysql:host=localhost;dbname=bulletinboard", 'root', "root");
-}catch (Exception $e){
-    $exFlag = true;
-    $exception = $e;
-    //echo $exception->getMessage();
-}
-//$statement = $pdo->query("SELECT * FROM 'User'");
+include 'Database.php';
 
-?>
+/*echo 'new test : ';
+$hostname = 'localhost';
+$dbname = "bulletin-board";
+$user = 'root';
+ $pass = 'root';
+$title = 'test';
+echo 'new test : ';
+try{
+    $pdo = null;
+    echo 'new test : ';
+    $pdo = new PDO("mysql:host=".$hostname.";dbname=".$dbname, $user, $pass);
+    echo 'new test : ';
+    $stm = $pdo->prepare("SELECT `id` FROM `bulletin-board`.Thread WHERE `title` = ?;");
+    echo 'new test : ';
+    $stm->bindParam(1, $title,PDO::PARAM_STR);
+    if($stm->execute()){
+        if($raw = $stm->fetch()){
+            echo $raw[id];
+        }else{
+            echo -1;
+        }
+    }else{
+        echo -1;
+    }
+    $pdo = null;
+}catch(Exception $e) {
+    echo $e->getMessage();
+}*/
 
-<div class="jumbotron">
-    <div class="container">
-        <h1>Hello, MySQL!</h1>
-        <p><?php
-            if($exFlag)
-                echo $exception->getMessage();
-            else
-                echo 'Success.'
-            ?></p>
-    </div>
-</div>
+//$a = 1;
+//echo Database::getThreadId('test');
+echo Database::createThread('test001','admin','test');
+?></h1>
 
 </body>
 

@@ -1,3 +1,5 @@
+
+
 <html>
 
 <head>
@@ -11,11 +13,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="js/bootstrap.min.js"></script>
+
 </head>
 
-<h1>
+<body>
 <?php
-include 'Database.php';
+ini_set('display_errors', 1);
+include_once ('Database.php');
+include_once ("Response.php");
 
 /*echo 'new test : ';
 $hostname = 'localhost';
@@ -47,9 +52,25 @@ try{
 }*/
 
 //$a = 1;
-//echo Database::getThreadId('test');
-echo Database::createThread('test001','admin','test');
-?></h1>
+//echo Database::getThreadId('test001');
+//echo Database::createThread('test001','admin','test');
+//$thread = ThreadClass::makeThread();
+//echo $thread->getThreadTitle();
+$title = 'test001';
+//echo " : ".$title."<br>";
+$id = Database::getThreadId($title);
+echo $id.'<br>';
+//echo 1 + "<br>";
+//$response = Database::getResponsesArray($title);
+//$response = new Response('a','a','a','a','a');
+$response = ThreadClass::makeThread('テスト');
+if(empty($response)){
+    echo no;
+}else{
+    print_r($response);
+}
+
+?>
 
 </body>
 

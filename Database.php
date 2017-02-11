@@ -6,6 +6,9 @@
  * Date: 2017/02/10
  * Time: 0:21
  */
+
+include_once 'Response.php';
+include_once 'ThreadClass.php';
 class Database
 {
     private static $hostname = 'localhost';
@@ -89,5 +92,25 @@ class Database
             return -1;
         }
     }
+
+    public static function getResponsesArray($threadTitle){
+        try{
+            $pdo = new PDO("mysql:host=".Database::$hostname.";dbname=".Database::$dbname, Database::$user, Database::$pass);
+            $stm = $pdo->prepare("SET NAMES utf8");
+            $stm->execute();
+            $stm = $pdo->prepare("SELECT * FROM `bulletin-board`.Response WHERE `thread_id` = ?;");
+            $stm->bindParam(1, Database::getThreadId($threadTitle),PDO::PARAM_INT);
+            if($stm->execute()){
+                $ans = array();
+                while($raw = $stm->fetch()){
+                     $ans[] = new Response($raw[response_id],$raw[user_name],$raw[date],$raw[thread_id],$raw[body]);
+                }
+                return $ans;
+            }else{
+                return array();
+            }
+        }catch(Exception $e) {
+            return array();
+        }
+    }
 }
-?>
